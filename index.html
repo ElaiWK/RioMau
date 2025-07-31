@@ -584,6 +584,64 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
   <script type="module" src="./src/contrato.js"></script>
   
+  <!-- Script de teste para debug -->
+  <script>
+    // Teste simples para verificar se os elementos são encontrados
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("🔍 TESTE: Verificando elementos...");
+      
+      const preencherTesteBtn = document.getElementById('preencherTeste');
+      const gerarContratoBtn = document.getElementById('gerarContrato');
+      const form = document.getElementById('fichaCliente');
+      
+      console.log("🔍 TESTE: Elementos encontrados:", {
+        preencherTesteBtn: !!preencherTesteBtn,
+        gerarContratoBtn: !!gerarContratoBtn,
+        form: !!form
+      });
+      
+      if (preencherTesteBtn) {
+        console.log("🔍 TESTE: Adicionando evento de teste ao botão 'Preencher Teste'");
+        preencherTesteBtn.addEventListener('click', function() {
+          console.log("🔍 TESTE: Botão 'Preencher Teste' clicado!");
+          alert("Botão funcionando! Agora vou preencher o formulário...");
+          
+          // Preencher dados de teste
+          if (form) {
+            form.nomeCompleto.value = 'João Maria da Silva';
+            form.numeroCC.value = '12345678 9 ZZ1';
+            form.dataValidadeCC.value = '2030-12-31';
+            form.nif.value = '250123456';
+            form.morada.value = 'Rua das Flores, 123, 1000-100 Lisboa';
+            form.emailCliente.value = 'joao.silva@email.com';
+            form.telefoneCliente.value = '912345678';
+            form.numeroLugar.value = '42';
+            form.dataInicio.value = new Date().toISOString().split('T')[0];
+            form.dataFim.value = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
+            form.valorMensal.value = '175';
+            form.nomeEmbarcacao.value = 'Belo Mar';
+            form.bandeira.value = 'Portuguesa';
+            form.portoRegisto.value = 'Lisboa';
+            form.numeroRegisto.value = 'LX-1234-AB';
+            form.comprimento.value = '12';
+            form.boca.value = '4';
+            form.pontal.value = '2';
+            form.materialCasco.value = 'Fibra de Vidro';
+            form.cor.value = 'Branco';
+            form.arqueacao.value = '15';
+            form.potenciaMotor.value = '50';
+            form.anoConstrucao.value = '2015';
+            form.seguroApolice.value = 'S-987654';
+            form.seguroCompanhia.value = 'Companhia de Seguros Segura';
+            
+            console.log("🔍 TESTE: Formulário preenchido com sucesso!");
+            alert("Formulário preenchido com dados de teste!");
+          }
+        });
+      }
+    });
+  </script>
+  
   <script>
     // Password protection
     const CORRECT_PASSWORD = 'MddkdsdsRM2025';
