@@ -1,0 +1,23 @@
+{
+  "name": "gerador-contratos",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.3",
+    "jspdf": "^3.0.1",
+    "mammoth": "^1.9.1",
+    "puppeteer": "^24.15.0",
+    "rtf.js": "^3.0.9"
+  }
+}

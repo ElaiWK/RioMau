@@ -1,0 +1,518 @@
+/* Reset e Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #000;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  color: #444;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* Ficha de Cliente */
+.ficha-cliente {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+  margin-bottom: 30px;
+}
+
+.ficha-cliente h2 {
+  color: #444;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+/* Toggle Pessoa Singular/Coletiva */
+.tipo-pessoa-toggle {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.toggle-label:hover {
+  border-color: #666;
+}
+
+.toggle-label input[type="radio"]:checked + span {
+  color: #000;
+  font-weight: 600;
+}
+
+.toggle-label input[type="radio"]:checked {
+  accent-color: #444;
+}
+
+.toggle-label input[type="radio"] {
+  margin: 0;
+}
+
+/* Campos do Formulário */
+.campos-grupo {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eee;
+}
+
+.campos-grupo:last-of-type {
+  border-bottom: none;
+}
+
+.campos-grupo h3 {
+  color: #444;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.campo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-full {
+  grid-column: 1 / -1;
+}
+
+.campo label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #444;
+}
+
+.campo input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: #444;
+  box-shadow: 0 0 0 2px rgba(68, 68, 68, 0.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Botões */
+.botoes {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.btn-gerar,
+.btn-download,
+.btn-voltar {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-gerar {
+  background-color: #444;
+  color: white;
+}
+
+.btn-gerar:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.btn-download {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-download:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.btn-voltar {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-voltar:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Preview do Contrato */
+.preview-contrato {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+
+.preview-contrato h2 {
+  color: #444;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Estilo do Contrato Renderizado */
+#preview {
+  width: 793px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  border-radius: 4px;
+}
+
+#preview .contrato-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#preview .contrato-logo img {
+  height: 100px;
+}
+
+#preview h1,
+#preview h2,
+#preview h3 {
+  color: #444;
+  margin-bottom: 15px;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+#preview h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+#preview h2 {
+  font-size: 18px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+#preview h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#preview p {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+#preview .clausula {
+  margin-bottom: 20px;
+}
+
+#preview .clausula-titulo {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+#preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5px 0;
+  font-size: 12px;
+  page-break-inside: avoid;
+}
+
+#preview .contract-table {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+#preview table th,
+#preview table td {
+  border: 1px solid #000;
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#preview table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+#preview .assinatura-area {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#preview .assinatura-campo {
+  text-align: center;
+  width: 200px;
+}
+
+#preview .assinatura-linha {
+  border-bottom: 1px solid #000;
+  margin-bottom: 5px;
+  height: 40px;
+}
+
+#preview .anexo {
+  margin-top: 40px;
+  padding-top: 10px;
+}
+
+#preview .anexo h1,
+#preview .anexo h2,
+#preview .anexo h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#preview .anexo p {
+  margin-bottom: 8px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+#preview .anexo ol {
+  font-size: 9px;
+  line-height: 1.2;
+  margin: 5px 0;
+}
+
+#preview .anexo img {
+  max-width: 100%;
+  max-height: 480px;
+  height: auto;
+  margin: 2px 0;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .campo-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tipo-pessoa-toggle {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #preview {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Contract Styles */
+#preview {
+  width: 793px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  border-radius: 4px;
+}
+
+/* Keep table together */
+.no-break-inside {
+  page-break-inside: avoid;
+}
+
+/* Annex sizing */
+.anexo-container {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.anexo-imagem {
+  max-height: 450px;
+  width: auto;
+  object-fit: contain;
+}
+
+.anexo-tabela-container {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+/* Print Styles for PDF */
+@media print {
+  @page {
+    margin: 1.5cm 2cm 2.5cm 2cm; /* top, right, bottom, left */
+    size: A4;
+  }
+  
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .ficha-cliente,
+  .preview-contrato {
+    box-shadow: none;
+    border: none;
+  }
+  
+  .botoes {
+    display: none !important;
+  }
+  
+  #preview {
+    width: 100% !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Force page breaks */
+  .contrato-section {
+    page-break-before: always !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    min-height: 25cm !important;
+    padding-bottom: 2cm !important;
+  }
+  
+  .contrato-section:first-child {
+    page-break-before: avoid !important;
+  }
+  
+  /* Ensure sections start at top of page */
+  .contrato-section h1,
+  .contrato-section h2,
+  .contrato-section h3,
+  .contrato-section h4 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Keep elements together */
+  .no-break-inside {
+    page-break-inside: avoid !important;
+  }
+  
+  /* Footer positioning */
+  .print-footer {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    font-size: 8pt !important;
+    line-height: 1.2 !important;
+    color: #666 !important;
+    border-top: 1px solid #ccc !important;
+    padding-top: 3mm !important;
+    padding-bottom: 2mm !important;
+    background-color: yellow !important;
+    border: 3px solid red !important;
+  }
+  
+  /* Limit annex sizes */
+  .anexo-container {
+    max-height: 20cm !important;
+    overflow: hidden !important;
+  }
+  
+  .anexo-imagem {
+    max-height: 18cm !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+  
+  .anexo-tabela-container {
+    max-height: 20cm !important;
+    overflow: hidden !important;
+  }
+  
+  /* Ensure proper spacing */
+  h1, h2, h3, h4 {
+    page-break-after: avoid !important;
+    margin-top: 0 !important;
+  }
+  
+  p {
+    page-break-inside: avoid !important;
+    margin-bottom: 0.5em !important;
+  }
+}
