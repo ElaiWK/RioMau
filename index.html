@@ -589,6 +589,8 @@
     const CORRECT_PASSWORD = 'MddkdsdsRM2025';
     
     document.addEventListener('DOMContentLoaded', function() {
+      console.log("🔐 Sistema de autenticação carregado");
+      
       const loginScreen = document.getElementById('loginScreen');
       const mainApp = document.getElementById('mainApp');
       const loginForm = document.getElementById('loginForm');
@@ -616,6 +618,9 @@
       function showMainApp() {
         loginScreen.style.display = 'none';
         mainApp.style.display = 'block';
+        
+        // Trigger a custom event to notify the main app that authentication is complete
+        window.dispatchEvent(new CustomEvent('authenticationComplete'));
       }
     });
   </script>

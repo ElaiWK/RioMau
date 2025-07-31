@@ -1,7 +1,8 @@
 import { generateFullContract } from './contractTemplate.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("✅ Aplicação Pronta.");
+// Função para inicializar a aplicação principal
+function initializeMainApp() {
+  console.log("✅ Inicializando aplicação principal...");
 
   // --- Seleção de Elementos ---
   const form = document.getElementById('fichaCliente');
@@ -13,7 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const formularioSection = document.getElementById('formularioSection');
   const previewSection = document.getElementById('previewSection');
-  const previewContent = document.getElementById('preview'); // O ID correto é 'preview'
+  const previewContent = document.getElementById('preview');
+
+  // Verificar se todos os elementos foram encontrados
+  console.log("🔍 Verificando elementos:", {
+    form: !!form,
+    gerarBtn: !!gerarBtn,
+    preencherTesteBtn: !!preencherTesteBtn,
+    exportarBtn: !!exportarBtn,
+    voltarBtn: !!voltarBtn,
+    formularioSection: !!formularioSection,
+    previewSection: !!previewSection,
+    previewContent: !!previewContent
+  });
+
+  if (!form || !gerarBtn || !preencherTesteBtn) {
+    console.error("❌ Elementos essenciais não encontrados!");
+    return;
+  }
 
   // --- Funções ---
 
@@ -29,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function preencherComDadosDeTeste() {
+    console.log("📝 Preenchendo formulário com dados de teste...");
+    
     // Dados para Pessoa Singular
     form.nomeCompleto.value = 'João Maria da Silva';
     form.numeroCC.value = '12345678 9 ZZ1';
@@ -60,10 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
     form.seguroApolice.value = 'S-987654';
     form.seguroCompanhia.value = 'Companhia de Seguros Segura';
     
-    console.log('📝 Formulário preenchido com dados de teste.');
+    console.log('✅ Formulário preenchido com dados de teste.');
   }
 
   async function gerarContrato() {
+    console.log("🚀 Iniciando geração de contrato...");
+    
     // Validar formulário antes de prosseguir
     if (!form.checkValidity()) {
         form.reportValidity();
@@ -120,19 +142,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Ligar Eventos ---
   
+  console.log("🔗 Ligando eventos aos botões...");
+  
   // Botões principais
   preencherTesteBtn.addEventListener('click', preencherComDadosDeTeste);
+  console.log("✅ Evento 'Preencher Teste' ligado");
+  
   gerarBtn.addEventListener('click', (e) => {
       e.preventDefault(); // Impedir a submissão padrão do formulário
       gerarContrato();
   });
+  console.log("✅ Evento 'Gerar Contrato' ligado");
+  
   voltarBtn.addEventListener('click', () => toggleView(false));
+  console.log("✅ Evento 'Voltar' ligado");
+  
   exportarBtn.addEventListener('click', exportarParaPdf);
+  console.log("✅ Evento 'Exportar PDF' ligado");
 
   // Toggle entre pessoa singular e coletiva
   tipoPessoaRadios.forEach(radio => radio.addEventListener('change', togglePessoaFields));
+  console.log("✅ Eventos de toggle pessoa ligados");
 
   // --- Estado Inicial ---
   togglePessoaFields(); // Garante que os campos certos são mostrados no arranque
-  console.log("✅ Botões e eventos ativos.");
+  console.log("✅ Aplicação principal inicializada com sucesso!");
+}
+
+// Aguardar autenticação antes de inicializar
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("📄 DOM carregado, aguardando autenticação...");
+  
+  // Se já está autenticado, inicializar imediatamente
+  if (sessionStorage.getItem('authenticated') === 'true') {
+    console.log("✅ Já autenticado, inicializando...");
+    initializeMainApp();
+  } else {
+    // Aguardar evento de autenticação
+    window.addEventListener('authenticationComplete', () => {
+      console.log("✅ Autenticação completa, inicializando...");
+      initializeMainApp();
+    });
+  }
 });
