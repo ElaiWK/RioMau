@@ -92,9 +92,9 @@ async function generateFullContract(formData) {
   
   try {
     const [corpoTemplate, regulamentoTemplate, anexoDocx] = await Promise.all([
-      fetch('src/data/corpo_do_contrato.html').then(res => res.text()),
-      fetch('src/data/Regulamento_de_Utilizacao.html').then(res => res.text()),
-      fetch('public/data/ANEXO_II_Regulamento_de_Tarifas.docx').then(res => res.arrayBuffer())
+      fetch('./src/data/corpo_do_contrato.html').then(res => res.text()),
+      fetch('./src/data/Regulamento_de_Utilizacao.html').then(res => res.text()),
+      fetch('./public/data/ANEXO_II_Regulamento_de_Tarifas.docx').then(res => res.arrayBuffer())
     ]);
 
     const anexoHtml = (await mammoth.convertToHtml({ arrayBuffer: anexoDocx })).value;
@@ -103,7 +103,7 @@ async function generateFullContract(formData) {
 
     const finalHtml = `
       <div class="contrato-header" style="margin-top: 0;">
-        <img src="public/assets/logo.png" alt="Logo" class="logo-contrato" />
+        <img src="./public/assets/logo.png" alt="Logo" class="logo-contrato" />
         <h1>${documentTitle}</h1>
       </div>
       ${corpoFinalHtml}
@@ -116,7 +116,7 @@ async function generateFullContract(formData) {
       <div class="anexo page-break-before">
         <h4 class="anexo-titulo">ANEXO I – ÁREA LICENCIADA</h4>
         <div class="imagem-container">
-            <img src="public/assets/Area_Licenciada_ANEXO-1.png" alt="Área Licenciada" class="anexo-imagem" />
+            <img src="./public/assets/Area_Licenciada_ANEXO-1.png" alt="Área Licenciada" class="anexo-imagem" />
         </div>
       </div>
       
