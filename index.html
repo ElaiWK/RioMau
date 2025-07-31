@@ -592,19 +592,35 @@
       
       const preencherTesteBtn = document.getElementById('preencherTeste');
       const gerarContratoBtn = document.getElementById('gerarContrato');
+      const exportarPdfBtn = document.getElementById('exportarPDF');
+      const voltarFormBtn = document.getElementById('voltarForm');
       const form = document.getElementById('fichaCliente');
+      const formularioSection = document.getElementById('formularioSection');
+      const previewSection = document.getElementById('previewSection');
+      const previewContent = document.getElementById('preview');
       
       console.log("🔍 TESTE: Elementos encontrados:", {
         preencherTesteBtn: !!preencherTesteBtn,
         gerarContratoBtn: !!gerarContratoBtn,
-        form: !!form
+        exportarPdfBtn: !!exportarPdfBtn,
+        voltarFormBtn: !!voltarFormBtn,
+        form: !!form,
+        formularioSection: !!formularioSection,
+        previewSection: !!previewSection,
+        previewContent: !!previewContent
       });
       
+      // Função para alternar entre formulário e preview
+      function toggleView(showPreview) {
+        formularioSection.style.display = showPreview ? 'none' : 'block';
+        previewSection.style.display = showPreview ? 'block' : 'none';
+      }
+      
+      // Botão Preencher Teste
       if (preencherTesteBtn) {
-        console.log("🔍 TESTE: Adicionando evento de teste ao botão 'Preencher Teste'");
+        console.log("🔍 TESTE: Adicionando evento ao botão 'Preencher Teste'");
         preencherTesteBtn.addEventListener('click', function() {
           console.log("🔍 TESTE: Botão 'Preencher Teste' clicado!");
-          alert("Botão funcionando! Agora vou preencher o formulário...");
           
           // Preencher dados de teste
           if (form) {
@@ -635,10 +651,92 @@
             form.seguroCompanhia.value = 'Companhia de Seguros Segura';
             
             console.log("🔍 TESTE: Formulário preenchido com sucesso!");
-            alert("Formulário preenchido com dados de teste!");
           }
         });
       }
+      
+      // Botão Gerar Contrato
+      if (gerarContratoBtn) {
+        console.log("🔍 TESTE: Adicionando evento ao botão 'Gerar Contrato'");
+        gerarContratoBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log("🔍 TESTE: Botão 'Gerar Contrato' clicado!");
+          
+          if (form && form.checkValidity()) {
+            const formData = Object.fromEntries(new FormData(form).entries());
+            console.log("🔍 TESTE: Dados do formulário:", formData);
+            
+            // Mostrar preview com dados básicos
+            if (previewContent) {
+              const clientName = formData.tipoPessoa === 'coletiva' ? formData.nomeEmpresa : formData.nomeCompleto;
+              const documentTitle = `CONTRATO DE LOCAÇÃO DE LUGAR DE ACOSTAGEM ANCORADOURO DE RIO MAU - ${clientName}`;
+              
+              previewContent.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                  <h1>${documentTitle}</h1>
+                  <p><strong>Cliente:</strong> ${clientName}</p>
+                  <p><strong>Número do Lugar:</strong> ${formData.numeroLugar}</p>
+                  <p><strong>Data de Início:</strong> ${formData.dataInicio}</p>
+                  <p><strong>Data de Fim:</strong> ${formData.dataFim}</p>
+                  <p><strong>Valor Mensal:</strong> €${formData.valorMensal}</p>
+                  <p><strong>Embarcação:</strong> ${formData.nomeEmbarcacao}</p>
+                  <hr>
+                  <p><em>Este é um preview básico. O contrato completo será gerado pelo módulo JavaScript.</em></p>
+                </div>
+              `;
+              
+              toggleView(true);
+              console.log("🔍 TESTE: Preview básico gerado com sucesso!");
+            }
+          } else {
+            console.log("🔍 TESTE: Formulário inválido!");
+            form.reportValidity();
+          }
+        });
+      }
+      
+      // Botão Exportar PDF
+      if (exportarPdfBtn) {
+        console.log("🔍 TESTE: Adicionando evento ao botão 'Exportar PDF'");
+        exportarPdfBtn.addEventListener('click', function() {
+          console.log("🔍 TESTE: Botão 'Exportar PDF' clicado!");
+          
+          // Esconder botões antes de imprimir
+          const buttons = document.querySelectorAll('.botoes');
+          buttons.forEach(btn => btn.style.display = 'none');
+          
+          // Imprimir
+          window.print();
+          
+          // Mostrar botões depois de imprimir
+          setTimeout(() => {
+            buttons.forEach(btn => btn.style.display = 'flex');
+          }, 1000);
+          
+          console.log("🔍 TESTE: Diálogo de impressão acionado!");
+        });
+      }
+      
+      // Botão Voltar
+      if (voltarFormBtn) {
+        console.log("🔍 TESTE: Adicionando evento ao botão 'Voltar'");
+        voltarFormBtn.addEventListener('click', function() {
+          console.log("🔍 TESTE: Botão 'Voltar' clicado!");
+          toggleView(false);
+        });
+      }
+      
+      // Toggle entre pessoa singular e coletiva
+      const tipoPessoaRadios = document.querySelectorAll('input[name="tipoPessoa"]');
+      tipoPessoaRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          const selected = document.querySelector('input[name="tipoPessoa"]:checked').value;
+          document.getElementById('camposPessoaSingular').style.display = (selected === 'singular') ? 'block' : 'none';
+          document.getElementById('camposPessoaColetiva').style.display = (selected === 'coletiva') ? 'block' : 'none';
+        });
+      });
+      
+      console.log("🔍 TESTE: Todos os eventos foram ligados!");
     });
   </script>
   
