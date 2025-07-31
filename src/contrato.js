@@ -74,6 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = Object.fromEntries(new FormData(form).entries());
     console.log("📄 Formulário submetido. A gerar contrato...", formData);
     
+    // Set document title based on client name
+    const clientName = formData.tipoPessoa === 'coletiva' ? formData.nomeEmpresa : formData.nomeCompleto;
+    const documentTitle = `CONTRATO DE LOCAÇÃO DE LUGAR DE ACOSTAGEM ANCORADOURO DE RIO MAU - ${clientName}`;
+    document.title = documentTitle;
+    
     previewContent.innerHTML = '<p style="text-align: center; padding: 50px;">A gerar o contrato, por favor aguarde...</p>';
     toggleView(true);
 
@@ -89,6 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function exportarParaPdf() {
     console.log("🚀 A iniciar exportação via impressão...");
+    
+    // Get client name for document title
+    const formData = Object.fromEntries(new FormData(form).entries());
+    const clientName = formData.tipoPessoa === 'coletiva' ? formData.nomeEmpresa : formData.nomeCompleto;
+    const documentTitle = `CONTRATO DE LOCAÇÃO DE LUGAR DE ACOSTAGEM ANCORADOURO DE RIO MAU - ${clientName}`;
+    
+    // Set document title for PDF
+    document.title = documentTitle;
     
     // Hide buttons before printing
     const buttons = document.querySelectorAll('.botoes');

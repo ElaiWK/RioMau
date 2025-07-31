@@ -19,6 +19,85 @@
       padding: 20px;
     }
     
+    /* Login Screen Styles */
+    #loginScreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    .login-logo {
+      height: 120px;
+      margin-bottom: 30px;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    
+    .login-title {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+    
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .login-input {
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    
+    .login-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .login-button {
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .login-button:hover {
+      transform: translateY(-2px);
+    }
+    
+    .error-message {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    /* Main App Styles */
+    #mainApp {
+      display: none;
+    }
+    
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -36,7 +115,7 @@
     .logo {
       height: 100px;
       margin-bottom: 15px;
-      image-rendering: -webkit-optimize-contrast; /* Mantém a imagem nítida */
+      image-rendering: -webkit-optimize-contrast;
     }
     
     h1, h2, h3 {
@@ -161,8 +240,8 @@
     /* --- Table Styles --- */
     .contract-table {
       width: 100%;
-      max-width: 17cm; /* Restrict width */
-      margin: 1.5em auto; /* Center it */
+      max-width: 17cm;
+      margin: 1.5em auto;
       border-collapse: collapse;
     }
     .contract-table td {
@@ -182,24 +261,24 @@
 
     .imagem-container {
       width: 100%;
-      text-align: center; /* Center the image within the container */
+      text-align: center;
     }
     .anexo-imagem {
-      max-width: 80%; /* Reduce image size */
+      max-width: 80%;
       height: auto;
       object-fit: contain;
     }
     
     .anexo-tabela-container table {
       width: 100%;
-      max-width: 18cm; /* Restrict width */
+      max-width: 18cm;
       margin: 0 auto;
       table-layout: fixed;
       font-size: 8pt;
       border-collapse: collapse;
     }
     .anexo-tabela-container td, .anexo-tabela-container th {
-      border: 1px solid #333; /* Add borders */
+      border: 1px solid #333;
       padding: 3px 5px;
       word-wrap: break-word;
     }
@@ -209,14 +288,12 @@
     
     /* --- Print-Specific Styles --- */
     @media print {
-      /* Hide elements that are not part of the contract */
       body > .container > header,
       body > .container > main > #formularioSection,
       #previewSection .botoes {
         display: none;
       }
 
-      /* Reset styles on the containers so the preview fills the page */
       body, .container, main, #previewSection, #preview {
         margin: 0 !important; padding: 0 !important; border: none !important;
         box-shadow: none !important; background: white !important;
@@ -231,12 +308,10 @@
         margin: 0; line-height: 1.2;
       }
 
-      /* Ensure content from DOCX is visible */
       .anexo-tabela-container, .anexo-tabela-container * {
         visibility: visible;
       }
       
-      /* Force table to be narrower and centered */
       .contract-table {
         width: 100%;
         max-width: 16cm;
@@ -245,14 +320,12 @@
       }
     }
     
-    /* PDF export classes (unchanged) */
-    /* Classes to prepare the document for PDF export */
     .preparing-for-pdf {
       margin: 0 !important;
       padding: 0 !important;
       border: none !important;
       box-shadow: none !important;
-      width: 21cm !important; /* Force A4 width for rendering */
+      width: 21cm !important;
     }
     body.pdf-export-in-progress .container > header,
     body.pdf-export-in-progress .container > main > #formularioSection,
@@ -260,12 +333,11 @@
       display: none;
     }
 
-    /* Helper class for PDF export container */
     .pdf-export-container {
       position: absolute;
-      left: -9999px; /* Move it off-screen */
+      left: -9999px;
       top: 0;
-      width: 21cm; /* Force A4 width */
+      width: 21cm;
       background: white;
     }
 
@@ -280,219 +352,272 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="public/contrato.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="/assets/logo.png" alt="Logo Marina do Rio Mau" class="logo" />
-      <h1>Gerador de Contratos</h1>
-    </header>
+  <!-- Login Screen -->
+  <div id="loginScreen">
+    <div class="login-container">
+      <img src="public/assets/logo.png" alt="Logo Marina do Rio Mau" class="login-logo" />
+      <h1 class="login-title">Gerador de Contratos</h1>
+      <form class="login-form" id="loginForm">
+        <input type="password" class="login-input" id="password" placeholder="Introduza a palavra-passe" required />
+        <button type="submit" class="login-button">Entrar</button>
+        <div class="error-message" id="errorMessage">Palavra-passe incorreta. Tente novamente.</div>
+      </form>
+    </div>
+  </div>
 
-    <main>
-      <!-- Formulário -->
-      <section id="formularioSection">
-        <h2>Ficha de Cliente</h2>
-        
-        <!-- Toggle Pessoa Singular / Coletiva -->
-        <div class="tipo-pessoa-toggle">
-          <label class="toggle-label">
-            <input type="radio" name="tipoPessoa" value="singular" checked />
-            <span>Pessoa Singular</span>
-          </label>
-          <label class="toggle-label">
-            <input type="radio" name="tipoPessoa" value="coletiva" />
-            <span>Pessoa Coletiva</span>
-          </label>
-        </div>
+  <!-- Main App -->
+  <div id="mainApp">
+    <div class="container">
+      <header>
+        <img src="public/assets/logo.png" alt="Logo Marina do Rio Mau" class="logo" />
+        <h1>Gerador de Contratos</h1>
+      </header>
 
-        <form id="fichaCliente">
-          <!-- Campos Pessoa Singular -->
-          <div id="camposPessoaSingular">
-            <h3>Dados Pessoais</h3>
-            <div class="campo-grid">
-              <div class="campo">
-                <label for="nomeCompleto">Nome Completo</label>
-                <input type="text" id="nomeCompleto" name="nomeCompleto" required />
-              </div>
-              <div class="campo">
-                <label for="numeroCC">Número do Cartão de Cidadão</label>
-                <input type="text" id="numeroCC" name="numeroCC" required />
-              </div>
-              <div class="campo">
-                <label for="dataValidadeCC">Data de Validade do CC</label>
-                <input type="date" id="dataValidadeCC" name="dataValidadeCC" required />
-              </div>
-              <div class="campo">
-                <label for="nif">NIF</label>
-                <input type="text" id="nif" name="nif" required />
-              </div>
-              <div class="campo campo-full">
-                <label for="morada">Morada</label>
-                <input type="text" id="morada" name="morada" required />
-              </div>
-            </div>
+      <main>
+        <!-- Formulário -->
+        <section id="formularioSection">
+          <h2>Ficha de Cliente</h2>
+          
+          <!-- Toggle Pessoa Singular / Coletiva -->
+          <div class="tipo-pessoa-toggle">
+            <label class="toggle-label">
+              <input type="radio" name="tipoPessoa" value="singular" checked />
+              <span>Pessoa Singular</span>
+            </label>
+            <label class="toggle-label">
+              <input type="radio" name="tipoPessoa" value="coletiva" />
+              <span>Pessoa Coletiva</span>
+            </label>
           </div>
 
-          <!-- Campos Pessoa Coletiva -->
-          <div id="camposPessoaColetiva" class="hidden">
-            <h3>Dados da Empresa</h3>
-            <div class="campo-grid">
-              <div class="campo">
-                <label for="nomeEmpresa">Nome da Empresa</label>
-                <input type="text" id="nomeEmpresa" name="nomeEmpresa" />
-              </div>
-              <div class="campo">
-                <label for="sede">Sede</label>
-                <input type="text" id="sede" name="sede" />
-              </div>
-              <div class="campo">
-                <label for="freguesia">Freguesia</label>
-                <input type="text" id="freguesia" name="freguesia" />
-              </div>
-              <div class="campo">
-                <label for="concelho">Concelho</label>
-                <input type="text" id="concelho" name="concelho" />
-              </div>
-              <div class="campo">
-                <label for="numeroCRC">Número do CRC</label>
-                <input type="text" id="numeroCRC" name="numeroCRC" />
-              </div>
-              <div class="campo">
-                <label for="capitalSocial">Capital Social</label>
-                <input type="text" id="capitalSocial" name="capitalSocial" />
-              </div>
-              <div class="campo campo-full">
-                <label for="representante">Representante</label>
-                <input type="text" id="representante" name="representante" />
+          <form id="fichaCliente">
+            <!-- Campos Pessoa Singular -->
+            <div id="camposPessoaSingular">
+              <h3>Dados Pessoais</h3>
+              <div class="campo-grid">
+                <div class="campo">
+                  <label for="nomeCompleto">Nome Completo</label>
+                  <input type="text" id="nomeCompleto" name="nomeCompleto" required />
+                </div>
+                <div class="campo">
+                  <label for="numeroCC">Número do Cartão de Cidadão</label>
+                  <input type="text" id="numeroCC" name="numeroCC" required />
+                </div>
+                <div class="campo">
+                  <label for="dataValidadeCC">Data de Validade do CC</label>
+                  <input type="date" id="dataValidadeCC" name="dataValidadeCC" required />
+                </div>
+                <div class="campo">
+                  <label for="nif">NIF</label>
+                  <input type="text" id="nif" name="nif" required />
+                </div>
+                <div class="campo campo-full">
+                  <label for="morada">Morada</label>
+                  <input type="text" id="morada" name="morada" required />
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Campos Comuns -->
-          <div>
-            <h3>Dados do Contrato</h3>
-            <div class="campo-grid">
-              <div class="campo">
-                <label for="numeroLugar">Número do Lugar</label>
-                <input type="text" id="numeroLugar" name="numeroLugar" required />
-              </div>
-              <div class="campo">
-                <label for="dataInicio">Data de Início</label>
-                <input type="date" id="dataInicio" name="dataInicio" required />
-              </div>
-              <div class="campo">
-                <label for="dataFim">Data de Fim</label>
-                <input type="date" id="dataFim" name="dataFim" required />
-              </div>
-              <div class="campo">
-                <label for="valorMensal">Valor Mensal (€)</label>
-                <input type="number" id="valorMensal" name="valorMensal" step="0.01" required />
+            <!-- Campos Pessoa Coletiva -->
+            <div id="camposPessoaColetiva" class="hidden">
+              <h3>Dados da Empresa</h3>
+              <div class="campo-grid">
+                <div class="campo">
+                  <label for="nomeEmpresa">Nome da Empresa</label>
+                  <input type="text" id="nomeEmpresa" name="nomeEmpresa" />
+                </div>
+                <div class="campo">
+                  <label for="sede">Sede</label>
+                  <input type="text" id="sede" name="sede" />
+                </div>
+                <div class="campo">
+                  <label for="freguesia">Freguesia</label>
+                  <input type="text" id="freguesia" name="freguesia" />
+                </div>
+                <div class="campo">
+                  <label for="concelho">Concelho</label>
+                  <input type="text" id="concelho" name="concelho" />
+                </div>
+                <div class="campo">
+                  <label for="numeroCRC">Número do CRC</label>
+                  <input type="text" id="numeroCRC" name="numeroCRC" />
+                </div>
+                <div class="campo">
+                  <label for="capitalSocial">Capital Social</label>
+                  <input type="text" id="capitalSocial" name="capitalSocial" />
+                </div>
+                <div class="campo campo-full">
+                  <label for="representante">Representante</label>
+                  <input type="text" id="representante" name="representante" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Dados da Embarcação -->
-          <div>
-            <h3>Dados da Embarcação</h3>
-            <div class="campo-grid">
-              <div class="campo">
-                <label for="nomeEmbarcacao">Nome</label>
-                <input type="text" id="nomeEmbarcacao" name="nomeEmbarcacao" required />
-              </div>
-              <div class="campo">
-                <label for="bandeira">Bandeira</label>
-                <input type="text" id="bandeira" name="bandeira" required />
-              </div>
-              <div class="campo">
-                <label for="portoRegisto">Porto de Registo</label>
-                <input type="text" id="portoRegisto" name="portoRegisto" required />
-              </div>
-              <div class="campo">
-                <label for="numeroRegisto">Nome de Registo</label>
-                <input type="text" id="numeroRegisto" name="numeroRegisto" required />
-              </div>
-              <div class="campo">
-                <label for="comprimento">Comprimento (m)</label>
-                <input type="number" id="comprimento" name="comprimento" step="0.01" required />
-              </div>
-              <div class="campo">
-                <label for="boca">Boca (m)</label>
-                <input type="number" id="boca" name="boca" step="0.01" required />
-              </div>
-              <div class="campo">
-                <label for="pontal">Pontal (m)</label>
-                <input type="number" id="pontal" name="pontal" step="0.01" required />
-              </div>
-              <div class="campo">
-                <label for="materialCasco">Material do Casco</label>
-                <input type="text" id="materialCasco" name="materialCasco" required />
-              </div>
-              <div class="campo">
-                <label for="cor">Cor</label>
-                <input type="text" id="cor" name="cor" required />
-              </div>
-              <div class="campo">
-                <label for="arqueacao">Arqueação</label>
-                <input type="number" id="arqueacao" name="arqueacao" step="0.01" required />
-              </div>
-              <div class="campo">
-                <label for="potenciaMotor">Potência do Motor (CV)</label>
-                <input type="number" id="potenciaMotor" name="potenciaMotor" required />
-              </div>
-              <div class="campo">
-                <label for="anoConstrucao">Ano de Construção</label>
-                <input type="number" id="anoConstrucao" name="anoConstrucao" required />
-              </div>
-              <div class="campo">
-                <label for="seguroApolice">Apólice de Seguro</label>
-                <input type="text" id="seguroApolice" name="seguroApolice" required />
-              </div>
-              <div class="campo">
-                <label for="seguroCompanhia">Companhia de Seguro</label>
-                <input type="text" id="seguroCompanhia" name="seguroCompanhia" required />
+            <!-- Campos Comuns -->
+            <div>
+              <h3>Dados do Contrato</h3>
+              <div class="campo-grid">
+                <div class="campo">
+                  <label for="numeroLugar">Número do Lugar</label>
+                  <input type="text" id="numeroLugar" name="numeroLugar" required />
+                </div>
+                <div class="campo">
+                  <label for="dataInicio">Data de Início</label>
+                  <input type="date" id="dataInicio" name="dataInicio" required />
+                </div>
+                <div class="campo">
+                  <label for="dataFim">Data de Fim</label>
+                  <input type="date" id="dataFim" name="dataFim" required />
+                </div>
+                <div class="campo">
+                  <label for="valorMensal">Valor Mensal (€)</label>
+                  <input type="number" id="valorMensal" name="valorMensal" step="0.01" required />
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Dados de Contacto -->
-          <div>
-            <h3>Dados de Contacto</h3>
-            <div class="campo-grid">
-              <div class="campo">
-                <label for="emailCliente">Email do Cliente</label>
-                <input type="email" id="emailCliente" name="emailCliente" required />
-              </div>
-              <div class="campo">
-                <label for="telefoneCliente">Telefone do Cliente</label>
-                <input type="tel" id="telefoneCliente" name="telefoneCliente" required />
+            <!-- Dados da Embarcação -->
+            <div>
+              <h3>Dados da Embarcação</h3>
+              <div class="campo-grid">
+                <div class="campo">
+                  <label for="nomeEmbarcacao">Nome</label>
+                  <input type="text" id="nomeEmbarcacao" name="nomeEmbarcacao" required />
+                </div>
+                <div class="campo">
+                  <label for="bandeira">Bandeira</label>
+                  <input type="text" id="bandeira" name="bandeira" required />
+                </div>
+                <div class="campo">
+                  <label for="portoRegisto">Porto de Registo</label>
+                  <input type="text" id="portoRegisto" name="portoRegisto" required />
+                </div>
+                <div class="campo">
+                  <label for="numeroRegisto">Nome de Registo</label>
+                  <input type="text" id="numeroRegisto" name="numeroRegisto" required />
+                </div>
+                <div class="campo">
+                  <label for="comprimento">Comprimento (m)</label>
+                  <input type="number" id="comprimento" name="comprimento" step="0.01" required />
+                </div>
+                <div class="campo">
+                  <label for="boca">Boca (m)</label>
+                  <input type="number" id="boca" name="boca" step="0.01" required />
+                </div>
+                <div class="campo">
+                  <label for="pontal">Pontal (m)</label>
+                  <input type="number" id="pontal" name="pontal" step="0.01" required />
+                </div>
+                <div class="campo">
+                  <label for="materialCasco">Material do Casco</label>
+                  <input type="text" id="materialCasco" name="materialCasco" required />
+                </div>
+                <div class="campo">
+                  <label for="cor">Cor</label>
+                  <input type="text" id="cor" name="cor" required />
+                </div>
+                <div class="campo">
+                  <label for="arqueacao">Arqueação</label>
+                  <input type="number" id="arqueacao" name="arqueacao" step="0.01" required />
+                </div>
+                <div class="campo">
+                  <label for="potenciaMotor">Potência do Motor (CV)</label>
+                  <input type="number" id="potenciaMotor" name="potenciaMotor" required />
+                </div>
+                <div class="campo">
+                  <label for="anoConstrucao">Ano de Construção</label>
+                  <input type="number" id="anoConstrucao" name="anoConstrucao" required />
+                </div>
+                <div class="campo">
+                  <label for="seguroApolice">Apólice de Seguro</label>
+                  <input type="text" id="seguroApolice" name="seguroApolice" required />
+                </div>
+                <div class="campo">
+                  <label for="seguroCompanhia">Companhia de Seguro</label>
+                  <input type="text" id="seguroCompanhia" name="seguroCompanhia" required />
+                </div>
               </div>
             </div>
-          </div>
 
+            <!-- Dados de Contacto -->
+            <div>
+              <h3>Dados de Contacto</h3>
+              <div class="campo-grid">
+                <div class="campo">
+                  <label for="emailCliente">Email do Cliente</label>
+                  <input type="email" id="emailCliente" name="emailCliente" required />
+                </div>
+                <div class="campo">
+                  <label for="telefoneCliente">Telefone do Cliente</label>
+                  <input type="tel" id="telefoneCliente" name="telefoneCliente" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="botoes">
+              <button type="button" id="preencherTeste">Preencher Teste</button>
+              <button type="submit" id="gerarContrato">Gerar Contrato</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Preview do Contrato -->
+        <section id="previewSection" style="display: none;">
+          <div id="preview">
+            <!-- O conteúdo do contrato será injetado aqui pelo JavaScript -->
+          </div>
           <div class="botoes">
-            <button type="button" id="preencherTeste">Preencher Teste</button>
-            <button type="submit" id="gerarContrato">Gerar Contrato</button>
+            <button type="button" id="voltarForm">Voltar ao Formulário</button>
+            <button type="button" id="exportarPDF">Exportar PDF</button>
           </div>
-        </form>
-      </section>
-
-      <!-- Preview do Contrato -->
-      <section id="previewSection" style="display: none;">
-        <div id="preview">
-          <!-- O conteúdo do contrato será injetado aqui pelo JavaScript -->
-        </div>
-        <div class="botoes">
-          <button type="button" id="voltarForm">Voltar ao Formulário</button>
-          <button type="button" id="exportarPDF">Exportar PDF</button>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
-  <script type="module" src="/src/contrato.js"></script>
+  <script type="module" src="src/contrato.js"></script>
+  
+  <script>
+    // Password protection
+    const CORRECT_PASSWORD = 'MddkdsdsRM2025';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginScreen = document.getElementById('loginScreen');
+      const mainApp = document.getElementById('mainApp');
+      const loginForm = document.getElementById('loginForm');
+      const passwordInput = document.getElementById('password');
+      const errorMessage = document.getElementById('errorMessage');
+      
+      // Check if user is already authenticated
+      if (sessionStorage.getItem('authenticated') === 'true') {
+        showMainApp();
+      }
+      
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (passwordInput.value === CORRECT_PASSWORD) {
+          sessionStorage.setItem('authenticated', 'true');
+          showMainApp();
+        } else {
+          errorMessage.style.display = 'block';
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      });
+      
+      function showMainApp() {
+        loginScreen.style.display = 'none';
+        mainApp.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
